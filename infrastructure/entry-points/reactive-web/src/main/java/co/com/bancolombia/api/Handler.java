@@ -7,8 +7,6 @@ import co.com.bancolombia.usecase.createbranch.CreateBranchUseCase;
 import co.com.bancolombia.usecase.createfranchise.CreateFranchiseUseCase;
 import co.com.bancolombia.usecase.createproduct.CreateProductUseCase;
 import co.com.bancolombia.usecase.deleteproduct.DeleteProductUseCase;
-import co.com.bancolombia.usecase.getallproducts.GetAllProductsUseCase;
-import co.com.bancolombia.usecase.getproductbyid.GetProductByIdUseCase;
 import co.com.bancolombia.usecase.gettopproductsbybranch.GetTopProductsByBranchUseCase;
 import co.com.bancolombia.usecase.updateproduct.UpdateProductUseCase;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-
-import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 
 @Component
 @RequiredArgsConstructor

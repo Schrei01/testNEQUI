@@ -1,5 +1,7 @@
 package co.com.bancolombia.config;
 
+import co.com.bancolombia.model.branch.gateways.BranchRepository;
+import co.com.bancolombia.model.franchise.gateways.FranchiseRepository;
 import co.com.bancolombia.model.product.gateways.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -32,6 +34,16 @@ public class UseCasesConfigTest {
         @Bean
         public ProductRepository productRepository() {
             return Mockito.mock(ProductRepository.class);
+        }
+
+        @Bean
+        public BranchRepository branchRepository() {
+            return Mockito.mock(BranchRepository.class);
+        }
+
+        @Bean
+        public FranchiseRepository franchiseRepository() {
+            return Mockito.mock(FranchiseRepository.class);
         }
     }
 }
