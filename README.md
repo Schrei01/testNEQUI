@@ -1,47 +1,60 @@
-# Proyecto Base Implementando Clean Architecture
+# Franchise & Branch Product Management API
 
-## Antes de Iniciar
+Este proyecto es una API reactiva construida con **Spring Boot WebFlux** para gestionar franquicias, sucursales y productos. Permite crear franquicias, agregar sucursales, registrar productos, modificar su stock y consultar el producto con mayor stock por sucursal.
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+---
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+## 🛠 Tecnologías principales
+- **Java 21**
+- **Spring Boot 3.5.4**
+- **Spring WebFlux** (programación reactiva)
+- **MongoDB** (base de datos NoSQL)
+- **JUnit 5** + **WebTestClient** (para pruebas)
+- **Mockito** (para mocks)
+- **Gradle** (gestión del proyecto)
 
-# Arquitectura
+---
 
-![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
+## 📦 Arquitectura del proyecto
+El proyecto sigue **Clean Architecture** con las siguientes capas:
 
-## Domain
+- **Domain**: Entidades del negocio y casos de uso.
+- **Use Cases**: Contienen la lógica de negocio.
+- **Infrastructure**:
+  - **Driven Adapters**: MongoDB Repository.
+  - **Entry Points**: API Reactiva con Spring WebFlux.
+- **Configuration**: Beans, routing y settings generales.
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+---
 
-## Usecases
+## 📬 Endpoints principales
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+### 1. Crear una franquicia
+```bash
+curl -X POST http://localhost:8080/api/franchises \
+  -H "Content-Type: application/json" \
+  -d '{"id": "1", "name": "Franchise1", "branches": []}'
 
-## Infrastructure
+## 🧩 Consideraciones de diseño
 
-### Helpers
+Clean Architecture
 
-En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
+Lógica de negocio aislada de infraestructura.
 
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+Facilita testeo unitario y reemplazo de tecnologías.
 
-Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
+Programación Reactiva
 
-### Driven Adapters
+Uso de Mono y Flux para peticiones no bloqueantes.
 
-Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
-soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
-interactuar.
+Ideal para sistemas con alta concurrencia.
 
-### Entry Points
+Test Driven Development (TDD)
 
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
+Pruebas con WebTestClient y Mockito.
 
-## Application
+Garantiza cobertura y calidad del código.
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+Extensibilidad
 
-**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+Fácil agregar nuevos casos de uso y endpoints.
