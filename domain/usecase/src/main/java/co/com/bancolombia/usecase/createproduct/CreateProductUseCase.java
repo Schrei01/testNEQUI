@@ -7,9 +7,10 @@ import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class CreateProductUseCase {
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
 
-    public Mono<Product> execute(Product product) {
-        return repository.save(product);
+    public Mono<Product> execute(String branchId, Product product) {
+        product.setBranchId(branchId);
+        return productRepository.save(product);
     }
 }

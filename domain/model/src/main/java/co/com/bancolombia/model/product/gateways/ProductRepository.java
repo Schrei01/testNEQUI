@@ -6,7 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface ProductRepository {
     Mono<Product> save(Product product);
-    Flux<Product> findAll();
     Mono<Product> findById(String id);
+    Flux<Product> findByBranchId(String branchId);
+    Flux<Product> findByFranchiseId(String franchiseId);
+    Flux<Product> findAll();
     Mono<Void> deleteById(String id);
 }

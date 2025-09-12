@@ -6,9 +6,9 @@ import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 public class DeleteProductUseCase {
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
 
-    public Mono<Void> execute(String id) {
-        return repository.deleteById(id);
+    public Mono<Void> execute(String productId) {
+        return productRepository.deleteById(productId);
     }
 }
