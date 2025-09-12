@@ -17,5 +17,6 @@ import java.util.List;
 public class Branch {
     private String name;
     private String address;
+    @Builder.Default
     private List<Product> products = new ArrayList<>();
 }

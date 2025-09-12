@@ -17,5 +17,6 @@ import java.util.List;
 public class Franchise {
     private String id;
     private String name;
+    @Builder.Default
     private List<Branch> branches = new ArrayList<>();
 }

@@ -1,0 +1,17 @@
+package co.com.bancolombia.mongo;
+
+import co.com.bancolombia.model.product.Product;
+import co.com.bancolombia.model.product.gateways.ProductRepository;
+import co.com.bancolombia.mongo.data.ProductData;
+import co.com.bancolombia.mongo.helper.AdapterOperations;
+import org.reactivecommons.utils.ObjectMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MongoRepositoryAdapter extends AdapterOperations<Product, ProductData, String, MongoDBRepository>
+        implements ProductRepository {
+
+    public MongoRepositoryAdapter(MongoDBRepository repository, ObjectMapper mapper) {
+        super(repository, mapper, d -> mapper.map(d, Product.class));
+    }
+}
