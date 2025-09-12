@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Branch {
+    private String id;
+    private String franchiseId;
     private String name;
     private String address;
     @Builder.Default

@@ -12,13 +12,26 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class RouterRest {
+
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(Handler handler) {
+    public RouterFunction<ServerResponse> routes(Handler handler) {
         return RouterFunctions
-                .route(GET("/api/products").and(accept(MediaType.APPLICATION_JSON)), handler::getAll)
-                .andRoute(GET("/api/products/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::getById)
-                .andRoute(POST("/api/products").and(contentType(MediaType.APPLICATION_JSON)), handler::create)
-                .andRoute(PUT("/api/products/{id}").and(contentType(MediaType.APPLICATION_JSON)), handler::update)
-                .andRoute(DELETE("/api/products/{id}"), handler::delete);
+                // 1. Agregar una nueva franquicia
+                .route(POST("/api/franchises").and(contentType(MediaType.APPLICATION_JSON)), handler::createFranchise)
+
+                // 2. Agregar una nueva sucursal a una franquicia
+                .andRoute(POST("/api/franchises/{franchiseId}/branches").and(contentType(MediaType.APPLICATION_JSON)), handler::createBranch)
+
+                // 3. Agregar un nuevo producto a una sucursal
+                .andRoute(POST("/api/branches/{branchId}/products").and(contentType(MediaType.APPLICATION_JSON)), handler::createProduct)
+
+                // 4. Eliminar un producto de una sucursal
+                .andRoute(DELETE("/api/branches/{branchId}/products/{productId}"), handler::deleteProduct)
+
+                // 5. Modificar el stock de un producto
+                .andRoute(PUT("/api/branches/{branchId}/products/{productId}/stock").and(contentType(MediaType.APPLICATION_JSON)), handler::updateProductStock)
+
+                // 6. Producto con más stock por sucursal para una franquicia puntual
+                .andRoute(GET("/api/franchises/{franchiseId}/branches/products/max-stock").and(accept(MediaType.APPLICATION_JSON)), handler::getMaxStockProducts);
     }
 }

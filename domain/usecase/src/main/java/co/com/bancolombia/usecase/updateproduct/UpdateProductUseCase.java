@@ -9,8 +9,9 @@ import reactor.core.publisher.Mono;
 public class UpdateProductUseCase {
     private final ProductRepository productRepository;
 
-    public Mono<Product> execute(String productId, int newStock) {
+    public Mono<Product> execute(String branchId, String productId, int newStock) {
         return productRepository.findById(productId)
+                .filter(product -> product.getBranchId().equals(branchId))
                 .flatMap(product -> {
                     product.setStock(newStock);
                     return productRepository.save(product);

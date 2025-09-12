@@ -8,7 +8,9 @@ import reactor.core.publisher.Mono;
 public class DeleteProductUseCase {
     private final ProductRepository productRepository;
 
-    public Mono<Void> execute(String productId) {
-        return productRepository.deleteById(productId);
+    public Mono<Void> execute(String branchId, String productId) {
+        return productRepository.findById(productId)
+                .filter(product -> product.getBranchId().equals(branchId))
+                .flatMap(product -> productRepository.deleteById(productId));
     }
 }
