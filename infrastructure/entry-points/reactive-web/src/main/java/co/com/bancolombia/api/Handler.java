@@ -77,10 +77,8 @@ public class Handler {
     // 6. Producto con más stock por sucursal de una franquicia
     public Mono<ServerResponse> getMaxStockProducts(ServerRequest request) {
         String franchiseId = request.pathVariable("franchiseId");
-        return getTopProductsByBranchUseCase.execute(franchiseId)
-                .collectList()
-                .flatMap(products -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .bodyValue(products));
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(getTopProductsByBranchUseCase.execute(franchiseId), Product.class);
     }
 }

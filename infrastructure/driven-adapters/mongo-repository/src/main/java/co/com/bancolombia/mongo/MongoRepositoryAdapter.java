@@ -21,10 +21,4 @@ public class MongoRepositoryAdapter extends AdapterOperations<Product, ProductDa
         return repository.findByBranchId(branchId)
                 .map(entity -> mapper.map(entity, Product.class));
     }
-
-    @Override
-    public Flux<Product> findByFranchiseId(String franchiseId) {
-        return repository.findByFranchiseId(franchiseId)
-                .map(entity -> mapper.map(entity, Product.class));
-    }
 }

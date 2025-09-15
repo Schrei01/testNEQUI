@@ -8,5 +8,4 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface MongoDBRepository extends ReactiveMongoRepository<ProductData, String> {
     Flux<ProductData> findByBranchId(String branchId);
-    Flux<ProductData> findByFranchiseId(String franchiseId);
 }

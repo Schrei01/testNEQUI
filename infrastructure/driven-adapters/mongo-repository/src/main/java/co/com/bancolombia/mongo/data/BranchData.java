@@ -5,16 +5,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "products")
-public class ProductData {
-
+@Builder(toBuilder = true)
+@Document(collection = "branches")
+public class BranchData {
     @Id
     private String id;
+    private String franchiseId;
     private String name;
-    private String branchId;
-    private Double price;
-    private int stock;
+    private String address;
 }
