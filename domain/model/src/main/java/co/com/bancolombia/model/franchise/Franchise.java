@@ -1,17 +1,12 @@
 package co.com.bancolombia.model.franchise;
 import co.com.bancolombia.model.branch.Branch;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-//import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-//@NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Franchise {
